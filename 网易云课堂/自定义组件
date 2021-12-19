@@ -1,0 +1,114 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+from PyQt5.QtCore import QSize, pyqtSignal
+from PyQt5.QtWidgets import QWidget, QHBoxLayout, QLabel, \
+    QPushButton, QListWidgetItem, QVBoxLayout, QListWidget, QApplication
+
+
+# 组件
+class ItemWidget(QWidget):
+    itemDeleted = pyqtSignal(QListWidgetItem)
+    itemShow = pyqtSignal(QListWidgetItem)
+
+    def __init__(self, text, item, *args, **kwargs):
+        super(ItemWidget, self).__init__(*args, **kwargs)
+
+        self._item = item  # 保留list item的对象引用
+
+        layout = QHBoxLayout(self)
+        layout.setContentsMargins(0, 0, 0, 0)
+
+        label1 = QLabel(self)
+        label1.setMinimumSize(QSize(240, 0))
+        label1.setText(text)
+        layout.addWidget(label1)
+
+        bt1 = QPushButton(self)
+        bt1.setMinimumSize(QSize(60, 0))
+        bt1.setText('show')
+        bt1.clicked.connect(self.showImageEvent)
+        layout.addWidget(bt1)
+
+        bt2 = QPushButton(self)
+        bt2.setMinimumSize(QSize(60, 0))
+        bt2.setText('delete')
+        bt2.clicked.connect(self.doDeleteItemEvent)
+        layout.addWidget(bt2)
+
+    def showImageEvent(self):
+        self.itemShow.emit(self._item)
+
+    def doDeleteItemEvent(self):
+        self.itemDeleted.emit(self._item)
+
+    def sizeHint(self):
+        # 决定item的高度
+        return QSize(400, 50)
+
+
+class Window(QWidget):
+
+    def __init__(self, *args, **kwargs):
+        super(Window, self).__init__(*args, **kwargs)
+        layout = QVBoxLayout(self)
+
+        # 列表
+        self.pathList = []
+        self.listWidget = QListWidget(self)
+        layout.addWidget(self.listWidget)
+
+        # 清空按钮
+        self.clearBtn = QPushButton('清空', self, clicked=self.doClearItem)
+        layout.addWidget(self.clearBtn)
+
+        # 添加测试数据
+        self.testData()
+
+    def doDeleteItem(self, item):
+        # 根据item得到它对应的行数
+        row = self.listWidget.indexFromItem(item).row()
+        self.pathList.pop(row)
+        # 删除item
+        item = self.listWidget.takeItem(row)
+        # 删除widget
+        self.listWidget.removeItemWidget(item)
+        del item
+
+    def showImage(self, item):
+        row = self.listWidget.indexFromItem(item).row()
+        print(row, self.pathList[row])
+
+    def doClearItem(self):
+        # 清空所有Item
+        for _ in range(self.listWidget.count()):
+            # 删除item
+            # 一直是0的原因是一直从第一行删,删掉第一行后第二行变成了第一行
+            # 这个和删除list [] 里的数据是一个道理
+            self.pathList.pop(0)
+            item = self.listWidget.takeItem(0)
+            # 删除widget
+            self.listWidget.removeItemWidget(item)
+            del item
+
+    def testData(self):
+        # 生成测试数据
+        for i in range(100):
+            item = QListWidgetItem(self.listWidget)
+            self.pathList.append('item: {}'.format(i))
+            widget = ItemWidget(self.pathList[-1], item, self.listWidget)
+            # 绑定删除信号
+            widget.itemDeleted.connect(self.doDeleteItem)
+            widget.itemShow.connect(self.showImage)
+            self.listWidget.setItemWidget(item, widget)
+
+
+if __name__ == '__main__':
+    import sys
+    import cgitb
+
+    cgitb.enable(format='text')
+
+    app = QApplication(sys.argv)
+    w = Window()
+    w.show()
+    sys.exit(app.exec_())

@@ -32,6 +32,11 @@ class ImageView(QWidget):
 
         # 从文件加载图片
         layout.addWidget(QLabel(self, pixmap=QPixmap("Data/head.jpg")))
+        # 从URL加载图片
+        import requests
+        photo = QPixmap()
+        photo.loadFromData(requests.get('https://cdn.jsdelivr.net/gh/Celeter/SourceGo/.github/scripts/alipay.jpg').content)
+        layout.addWidget(QLabel(self, pixmap=photo))
 
         # QResource 参考 http://doc.qt.io/qt-5/resources.html
 

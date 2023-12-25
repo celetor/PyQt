@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
 """
 Created on 2018年4月30日
 @author: Irony
@@ -10,12 +9,14 @@ Created on 2018年4月30日
 @description:
 """
 
+import sys
+
 try:
-    from PyQt5.QtCore import QTimer, Qt, QEvent, QObject
-    from PyQt5.QtGui import QWindow, QPainter, QColor, QMouseEvent
-    from PyQt5.QtWidgets import QApplication, QWidget, QMessageBox
+    from PyQt5.QtCore import QEvent, QObject, QPoint, Qt, QTimer
+    from PyQt5.QtGui import QColor, QMouseEvent, QPainter, QWindow
+    from PyQt5.QtWidgets import QApplication, QMessageBox, QWidget
 except ImportError:
-    from PySide2.QtCore import QTimer, Qt, QEvent, QObject
+    from PySide2.QtCore import QTimer, Qt, QEvent, QObject, QPoint
     from PySide2.QtGui import QWindow, QPainter, QColor, QMouseEvent
     from PySide2.QtWidgets import QApplication, QWidget, QMessageBox
 
@@ -96,15 +97,25 @@ class FramelessObject(QObject):
         else:
             if self.is_titlebar(pos):
                 window.startSystemMove()
+                # Fixed #172 主动触发一次鼠标释放事件，否则会导致鼠标悬停出问题
+                QApplication.instance().postEvent(
+                    window,
+                    QMouseEvent(QEvent.MouseButtonRelease, QPoint(-1, -1),
+                                Qt.LeftButton, Qt.NoButton, Qt.NoModifier))
 
     def eventFilter(self, obj, event):
         if obj.isWindowType():
             # top window 处理光标样式
-            if event.type() == QEvent.MouseMove and obj.windowState() == Qt.WindowNoState:
-                obj.setCursor(self._get_cursor(self._get_edges(event.pos(), obj.width(), obj.height())))
+            if event.type() == QEvent.MouseMove and obj.windowState(
+            ) == Qt.WindowNoState:
+                obj.setCursor(
+                    self._get_cursor(
+                        self._get_edges(event.pos(), obj.width(),
+                                        obj.height())))
             elif event.type() == QEvent.TouchUpdate:
                 self.moveOrResize(obj, event.pos(), obj.width(), obj.height())
-        elif obj in self.Widgets and isinstance(event, QMouseEvent) and event.button() == Qt.LeftButton:
+        elif obj in self.Widgets and isinstance(
+                event, QMouseEvent) and event.button() == Qt.LeftButton:
             if event.type() == QEvent.MouseButtonDblClick:
                 # 双击最大化还原
                 if self.is_titlebar(event.pos()):
@@ -115,7 +126,8 @@ class FramelessObject(QObject):
                     else:
                         obj.showMaximized()
             elif event.type() == QEvent.MouseButtonPress:
-                self.moveOrResize(obj.windowHandle(), event.pos(), obj.width(), obj.height())
+                self.moveOrResize(obj.windowHandle(), event.pos(), obj.width(),
+                                  obj.height())
 
         return False
 
@@ -137,6 +149,18 @@ class FramelessWindow(QWidget, Ui_FormFrameless):
         self.buttonNormal.clicked.connect(self.showNormal)
         self.buttonClose.clicked.connect(self.close)
         self.setStyleSheet('#widgetTitleBar{background: rgb(232, 232, 232);}')
+
+    def showMinimized(self):
+        flags = self.windowFlags()
+        if sys.platform == 'darwin':
+            # fix mac 最小化失效问题
+            self.setWindowFlags((self.windowFlags() | Qt.CustomizeWindowHint) &
+                                (~Qt.WindowTitleHint))
+        super(FramelessWindow, self).showMinimized()
+        if sys.platform == 'darwin':
+            # fix mac 最小化失效问题
+            self.setWindowFlags(flags)
+            self.show()
 
     def changeEvent(self, event):
         """窗口状态改变
@@ -161,8 +185,8 @@ class FramelessWindow(QWidget, Ui_FormFrameless):
 
 
 if __name__ == '__main__':
-    import sys
     import cgitb
+    import sys
 
     cgitb.enable(format='text')
 

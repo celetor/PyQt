@@ -5,7 +5,7 @@
 [![Badge](https://img.shields.io/badge/link-996.icu-%23FF4D5B.svg?style=flat-square)](https://996.icu/#/zh_CN)
 [![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg?style=flat-square)](https://github.com/996icu/996.ICU/blob/master/LICENSE)
 
-https://pyqt.site 论坛是专门针对PyQt5学习和提升开设的网站，分享大家平时学习中记录的笔记和例子，以及对遇到的问题进行收集整理。
+[https://pyqt.site](https://pyqt.site) 论坛是专门针对PyQt5学习和提升开设的网站，分享大家平时学习中记录的笔记和例子，以及对遇到的问题进行收集整理。
 
 [![GitHub watchers](https://img.shields.io/github/watchers/PyQt5/PyQt.svg?style=social&label=Watch)](https://github.com/PyQt5/PyQt)
 [![GitHub stars](https://img.shields.io/github/stars/PyQt5/PyQt.svg?style=social)](https://github.com/PyQt5/PyQt)
@@ -13,20 +13,35 @@ https://pyqt.site 论坛是专门针对PyQt5学习和提升开设的网站，分
 
 如果您觉得这里的东西对您有帮助，别忘了帮忙点一颗:star:小星星:star:
 
-[客户端下载](https://github.com/PyQt5/PyQtClient/releases)
+[客户端下载](https://github.com/PyQt5/PyQtClient/releases) | [自定义控件](https://github.com/PyQt5/CustomWidgets)
 
-[自定义控件](https://github.com/PyQt5/CustomWidgets)
+## QQ群
+
+<a href="javascript:;" alt="PyQt 学习"><img src="Donate/PyQt_Group.png" height="360" width="300"></a> or <a href="javascript:;" alt="PyQt 频道"><img src="Donate/PyQt_Guild.png" height="360" width="300"></a>
+
+　　　　　　　[PyQt 学习](https://jq.qq.com/?_wv=1027&k=5QVVEdF)
+　　　　　　　　
+　　　　　　　[PyQt 频道](https://pd.qq.com/s/157c1hiay)
+
+## 状态
+![Alt](https://repobeats.axiom.co/api/embed/12e69289ec9d9a7037d2c31aaaadd228dd99638f.svg "Repobeats analytics image")
 
 ## 目录
 
 - Layouts
   - [QVBoxLayout](QVBoxLayout)
+    - [垂直布局](QVBoxLayout#1垂直布局)
+    - [边距和间隔](QVBoxLayout#2边距和间隔)
+    - [比例分配](QVBoxLayout#3比例分配)
   - [QHBoxLayout](QHBoxLayout)
+    - [水平布局](QHBoxLayout#1水平布局)
+    - [边距和间隔](QHBoxLayout#2边距和间隔)
+    - [比例分配](QHBoxLayout#3比例分配)
   - [QGridLayout](QGridLayout)
-    - [腾讯视频热播列表](QGridLayout/HotPlaylist.py)
+    - [音乐热歌列表](QGridLayout/HotPlaylist.py)
   - [QFormLayout](QFormLayout)
   - [QFlowLayout](QFlowLayout)
-    - [腾讯视频热播列表](QFlowLayout/HotPlaylist.py)
+    - [音乐热歌列表](QFlowLayout/HotPlaylist.py)
 
 - Spacers
   - [Horizontal Spacer](QSpacerItem)
@@ -57,7 +72,7 @@ https://pyqt.site 论坛是专门针对PyQt5学习和提升开设的网站，分
   - [QListWidget](QListWidget)
     - [删除自定义Item](QListWidget/DeleteCustomItem.py)
     - [自定义可拖拽Item](QListWidget/DragDrop.py)
-    - [腾讯视频热播列表](QListWidget/HotPlaylist.py)
+    - [音乐热歌列表](QListWidget/HotPlaylist.py)
     - [仿折叠控件效果](QListWidget/FoldWidget.py)
     - [列表常用信号](QListWidget/SignalsExample.py)
     - [在item中添加图标](Test/partner_625781186/13.combo_listwidget)
@@ -87,6 +102,7 @@ https://pyqt.site 论坛是专门针对PyQt5学习和提升开设的网站，分
 - Input Widgets
   - [QComboBox](QComboBox)
     - [下拉数据关联](QComboBox/CityLinkage.py)
+    - [文本居中显示](QComboBox/CenterText.py)
   - [QFontComboBox](QFontComboBox)
   - [QLineEdit](QLineEdit)
   - [QTextEdit](QTextEdit)
@@ -117,6 +133,7 @@ https://pyqt.site 论坛是专门针对PyQt5学习和提升开设的网站，分
     - [绘制世界地图](QGraphicsView/WorldMap.py)
     - [添加QWidget](QGraphicsView/AddQWidget.py)
     - [图片查看器](QGraphicsView/ImageView.py)
+    - [图标拖拽](QGraphicsView/DragGraphics.py)
   - [QCalendarWidget](QCalendarWidget)
     - [QSS美化日历样式](QCalendarWidget/CalendarQssStyle.py)
   - [QLCDNumber](QLCDNumber)
@@ -127,6 +144,7 @@ https://pyqt.site 论坛是专门针对PyQt5学习和提升开设的网站，分
     - [Metro进度条](QProgressBar/MetroCircleProgress.py)
     - [水波纹进度条](QProgressBar/WaterProgressBar.py)
     - [圆形水位进度条](QProgressBar/WaterProgress.py)
+    - [多彩动画进度条](QProgressBar/ColourfulProgress.py)
   - [QSplashScreen](QSplashScreen)
     - [启动画面动画](QSplashScreen/GifSplashScreen.py)
   - [QOpenGLWidget](QOpenGLWidget)
@@ -144,8 +162,11 @@ https://pyqt.site 论坛是专门针对PyQt5学习和提升开设的网站，分
     - [同网站不同用户](QWebEngineView/SiteDiffUser.py)
     - [拦截请求](QWebEngineView/BlockRequest.py)
     - [拦截请求内容](QWebEngineView/BlockRequestData.py)
+    - [设置Cookie](QWebEngineView/SetCookies.py)
     - [浏览器下载文件](Test/partner_625781186/6.QWebEngineView下载文件)
     - [打印网页](Test/partner_625781186/17_打印预览qwebengineview)
+  - [QWebChannel](QWebChannel)
+    - [和Js互相调用](QWebChannel/CallEachWithJs.py)
 
 - [QThread](QThread)
   - [继承QThread](QThread/InheritQThread.py)
@@ -202,6 +223,8 @@ https://pyqt.site 论坛是专门针对PyQt5学习和提升开设的网站，分
   - [simpleswitch](QtRemoteObjects/simpleswitch)
 
 - [QPainter](QPainter)
+  - [QPainter绘制各种图形](QPainter/StockDialog.py)
+  - [简易画板](QPainter/Draw.py)
 
 - [QtWinExtras](QtWinExtras)
   - [任务栏进度条](QtWinExtras/TaskbarProgress.py)
@@ -220,6 +243,9 @@ https://pyqt.site 论坛是专门针对PyQt5学习和提升开设的网站，分
     - [分割窗口的分割条重绘](QSplitter/RewriteHandle.py)
   - [QSerialPort](QSerialPort)
     - [串口调试小助手](QSerialPort/SerialDebugAssistant.py)
+  - [QProcess](QProcess)
+    - [执行命令得到结果](QProcess/GetCmdResult.py)
+    - [交互执行命令](QProcess/InteractiveRun.py)
   - [QProxyStyle](QProxyStyle)
     - [Tab文字方向](QProxyStyle/TabTextDirection.py)
     - [Tab角落控件位置占满](QProxyStyle/TabCornerWidget.py)
@@ -233,6 +259,10 @@ https://pyqt.site 论坛是专门针对PyQt5学习和提升开设的网站，分
     - [边框阴影动画](QGraphicsDropShadowEffect/ShadowEffect.py)
   - [QSystemTrayIcon](QSystemTrayIcon)
     - [最小化到系统托盘](QSystemTrayIcon/MinimizeToTray.py)
+  - [QSystemTrayIcon](QSystemTrayIcon)
+    - [系统托盘闪烁](QSystemTrayIcon/TrayNotify.py)
+  - [QMetaObject](QMetaObject)
+    - [在线程中操作UI](QMetaObject/CallInThread.py)
 
 - [Demo](Demo)
   - [重启窗口Widget](Demo/RestartWindow.py)
@@ -260,15 +290,13 @@ https://pyqt.site 论坛是专门针对PyQt5学习和提升开设的网站，分
   - [屏幕变动监听](Demo/ScreenNotify.py)
   - [无边框窗口](Demo/NewFramelessWindow.py)
 
-# QQ群
 
-[PyQt 学习](https://jq.qq.com/?_wv=1027&k=5QVVEdF)
+## 其它项目
+[一些Qt写的三方APP](https://github.com/PyQt5/3rd-Apps)
 
 
-# [Donate-打赏](Donate)
+## [Donate-打赏](Donate)
 
 感谢所有捐助者的鼓励，[这里](https://github.com/PyQt5/thanks) 列出了捐助者名单（由于一些收款渠道无法知道对方是谁，如有遗漏请联系我修改）
 
-<a href="javascript:;" alt="微信"><img src="Donate/weixin.png" height="350" width="350"></a>or<a href="javascript:;" alt="支付宝"><img src="Donate/zhifubao.png" height="350" width="350"></a>
-
-[一些Qt写的三方APP](https://github.com/PyQt5/3rd-Apps)
+<a href="javascript:;" alt="微信"><img src="Donate/weixin.png" height="175" width="175"></a>or<a href="javascript:;" alt="支付宝"><img src="Donate/zhifubao.png" height="175" width="175"></a>
